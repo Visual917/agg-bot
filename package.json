@@ -1,0 +1,15 @@
+{
+  "name": "agg-bot",
+  "version": "1.0.0",
+  "description": "Ayhan Gazi sunucusunun resmi Discord botu.",
+  "main": "agg.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.3.1",
+    "pretty-ms": "^8.0.0"
+  }
+}
