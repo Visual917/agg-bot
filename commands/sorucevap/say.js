@@ -37,7 +37,7 @@ module.exports = {
     const dir = "messages/" + args[0] + ".d";
     const msj = fs.readFileSync(dir, "utf8");
     const msjFirstLine = msj.split("\n")[0];
-    const msjSecondLine = msj.split("\n")[1];
+    const msjSecondLine = msj.split("\n").slice(1).join("\n");
     const embedSend1 = new discordJS.MessageEmbed()
       .setColor("#FF1818")
       .setTitle(msjFirstLine)
