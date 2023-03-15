@@ -35,8 +35,73 @@ for (const folder of commandFolders) {
 client.login(token);
 client.once("ready", () => {
   console.log("!agg Hazır!");
-});
+  var channel = client.channels.cache.get("1085466895743987712");
+  var channel2 = client.channels.cache.get("1085466895743987712");
+  const filter = (interaction) => interaction.customId === "accept_rules";
+  const collector = channel.createMessageComponentCollector({
+    filter,
+  });
 
+  // When a user clicks the accept button, assign them the role and send a message confirming it
+  collector.on("collect", (interaction) => {
+    const user = interaction.user;
+    const member = interaction.guild.members.cache.get(user.id);
+    var roleID = "1084460784777699428";
+    const role = interaction.guild.roles.cache.get(roleID);
+
+    if (member.roles.cache.has(roleID)) {
+      interaction.reply({
+        content: "Kuralları zaten kabul ettiniz.",
+        ephemeral: true,
+      });
+    } else {
+      member.roles.add(roleID);
+      interaction.reply({
+        content:
+          "Kuralları kabul ettiniz ve rolünüz verildi. Artık sunucuda bir üyesiniz.",
+        ephemeral: true,
+      });
+    }
+  });
+  const filter2 = (interaction) =>
+    interaction.customId.contains("assign_role_");
+
+  const collector2 = channel2.createMessageComponentCollector({
+    filter2,
+  });
+  const roleIDs = {
+    Geliştirici: "1084859945897439422",
+    Sanatçı: "1084858236374618192",
+    Tasarımcı: "1082673213353492550",
+    Öğrenci: "1085460541109174332",
+  };
+  collector2.on("collect", async (interaction) => {
+    const user = interaction.user;
+    const member = interaction.guild.members.cache.get(user.id);
+    const role = interaction.guild.roles.cache.get(
+      roleIDs[interaction.customId.replace("assign_role_", "")],
+    );
+
+    if (member.roles.cache.has(role.id)) {
+      await interaction.reply({
+        content: "Zaten bu role sahipsiniz!",
+        ephemeral: true,
+      });
+    } else {
+      // remove all other roles
+      for (const [key, value] of Object.entries(roleIDs)) {
+        if (member.roles.cache.has(value)) {
+          await member.roles.remove(value);
+        }
+      }
+      await member.roles.add(role.id);
+      await interaction.reply({
+        content: `Başarıyla **${role.name}** rolü verildi!`,
+        ephemeral: true,
+      });
+    }
+  });
+});
 
 client.on("messageCreate", async (message) => {
   /*var removed = false;
