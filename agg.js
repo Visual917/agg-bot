@@ -35,8 +35,8 @@ for (const folder of commandFolders) {
 client.login(token);
 client.once("ready", () => {
   console.log("!agg Hazır!");
-  var channel = client.channels.cache.get("1085466895743987712");
-  var channel2 = client.channels.cache.get("1085466895743987712");
+  var channel = client.channels.cache.get("1076852607622058075");
+  var channel2 = client.channels.cache.get("1085461118358655038");
   const filter = (interaction) => interaction.customId === "accept_rules";
   const collector = channel.createMessageComponentCollector({
     filter,
