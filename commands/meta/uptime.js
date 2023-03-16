@@ -8,7 +8,7 @@ module.exports = {
         "<@" +
           message.author.id +
           "> " +
-          `!agg şu kadar süredir çevrimiçi: ${await prettyMilliseconds(
+          `DT Bot şu kadar süredir çevrimiçi: ${await prettyMilliseconds(
             discordClient.uptime,
           )}`,
       );
