@@ -1,2 +1,0 @@
-test mesajı
-123
